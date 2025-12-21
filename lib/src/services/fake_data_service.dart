@@ -1,4 +1,5 @@
 import '../models/crag_model.dart';
+import '../models/route_model.dart';
 
 /// 简单的内存数据源（同步、无异步）。
 class FakeDataService {
@@ -79,13 +80,72 @@ class FakeDataService {
     ),
   ];
 
+  final List<ClimbRoute> _routes = const [
+    ClimbRoute(
+      id: 'r-damiao-1',
+      cragId: 'c-damiao',
+      name: '石门初见',
+      grade: '5.9',
+      type: '运动',
+      style: '垂壁',
+      quickdraws: 10,
+    ),
+    ClimbRoute(
+      id: 'r-damiao-2',
+      cragId: 'c-damiao',
+      name: '寺顶风',
+      grade: '5.10b',
+      type: '运动',
+      style: '缓坡',
+      quickdraws: 12,
+    ),
+    ClimbRoute(
+      id: 'r-damiao-3',
+      cragId: 'c-damiao',
+      name: '石狮路',
+      grade: '5.11c',
+      type: '运动',
+      style: '陡峭',
+      quickdraws: 14,
+    ),
+    ClimbRoute(
+      id: 'r-leipi-1',
+      cragId: 'c-leipi',
+      name: '雷声',
+      grade: '5.10a',
+      type: '运动',
+      style: '垂壁',
+      quickdraws: 9,
+    ),
+    ClimbRoute(
+      id: 'r-leipi-2',
+      cragId: 'c-leipi',
+      name: '霹雳线',
+      grade: '5.11b',
+      type: '运动',
+      style: '陡峭',
+      quickdraws: 13,
+    ),
+    ClimbRoute(
+      id: 'r-leipi-3',
+      cragId: 'c-leipi',
+      name: '雨后',
+      grade: '5.12a',
+      type: '运动',
+      style: '缓坡',
+      quickdraws: 15,
+    ),
+  ];
+
   // API
   List<Province> getProvinces() => List.unmodifiable(_provinces);
   List<Region> getRegionsByProvince(String provinceId) =>
       List.unmodifiable(_regions.where((region) => region.provinceId == provinceId));
   List<CragSummary> getCragsByRegion(String regionId) =>
       List.unmodifiable(_crags.where((crag) => crag.regionId == regionId));
+  CragSummary? getCragById(String id) => _crags.where((crag) => crag.id == id).firstOrNull;
   CragDetail? getCragDetailById(String id) => _cragDetails.where((detail) => detail.id == id).firstOrNull;
+  List<ClimbRoute> getRoutes() => List.unmodifiable(_routes);
 }
 
 // 小扩展：firstOrNull

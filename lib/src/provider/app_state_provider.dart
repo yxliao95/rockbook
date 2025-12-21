@@ -16,7 +16,6 @@ final appStateProvider = NotifierProvider<AppStateNotifier, AppStateModel>(AppSt
 // 使用：ref.watch(currentTabIndexProvider) -> int
 // 等价的更简写写法（不单独定义派生 Provider，也能达到“只监听某字段”的效果）：
 // final index = ref.watch(appStateProvider.select((s) => s.currentTabIndex));
-final selectedGymIdProvider = Provider<String?>((ref) => ref.watch(appStateProvider).selectedGymId);
 final currentTabIndexProvider = Provider<int>((ref) => ref.watch(appStateProvider).currentTabIndex);
 
 /// 全局应用状态
@@ -32,11 +31,6 @@ class AppStateNotifier extends Notifier<AppStateModel> {
 
   @override
   AppStateModel build() => const AppStateModel();
-
-  void selectGym(String id) {
-    if (state.selectedGymId == id) return;
-    state = state.copyWith(selectedGymId: id);
-  }
 
   void setTabTo(int index) {
     if (state.currentTabIndex == index) return;

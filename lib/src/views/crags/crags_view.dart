@@ -31,9 +31,9 @@ class CragsPage extends ConsumerWidget {
                       title: Text(region.name),
                       trailing: const Icon(Icons.chevron_right),
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => RegionCragsPage(region: region)),
-                        );
+                        Navigator.of(
+                          context,
+                        ).push(MaterialPageRoute(builder: (context) => RegionCragsPage(region: region)));
                       },
                     ),
                   )
