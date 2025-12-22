@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/crag_model.dart';
 import '../../provider/crags_provider.dart';
 import '../../provider/routes_provider.dart';
+import '../common/route_log_dialog.dart';
 
 /// 线路页面示例
 class RoutesPage extends ConsumerWidget {
@@ -52,13 +53,18 @@ class RoutesPage extends ConsumerWidget {
         );
         widgets.addAll(
           cragGroup.routes.map(
-            (route) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 6),
-              child: Row(
-                children: [
-                  Expanded(child: Text(route.name)),
-                  Text(route.grade, style: Theme.of(context).textTheme.bodyMedium),
-                ],
+            (route) => InkWell(
+              onTap: () {
+                showDialog(context: context, builder: (_) => RouteLogDialog(route: route));
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 6),
+                child: Row(
+                  children: [
+                    Expanded(child: Text(route.name)),
+                    Text(route.grade, style: Theme.of(context).textTheme.bodyMedium),
+                  ],
+                ),
               ),
             ),
           ),

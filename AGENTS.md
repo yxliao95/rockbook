@@ -4,6 +4,8 @@
 
 ## 项目架构设计
 
+使用 Flutter2.0 及以上版本开发，采用 Riverpod 作为状态管理方案。
+
 ```
 lib/
 ├── main.dart

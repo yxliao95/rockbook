@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../models/crag_model.dart';
 import '../../provider/crags_provider.dart';
+import 'crag_routes_view.dart';
 
 class CragDetailPage extends ConsumerWidget {
   final String cragId;
@@ -22,6 +23,17 @@ class CragDetailPage extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          FilledButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => CragRoutesPage(cragId: detail.id, cragName: detail.name),
+                ),
+              );
+            },
+            child: const Text('查看所有线路'),
+          ),
+          const SizedBox(height: 16),
           _InfoSection(
             title: '基础信息',
             children: [
