@@ -18,3 +18,7 @@ final cragsByRegionProvider = Provider.family<List<CragSummary>, String>((ref, r
 final cragDetailProvider = Provider.family<CragDetail?, String>((ref, cragId) {
   return FakeDataService.instance.getCragDetailById(cragId);
 });
+
+final cragByIdProvider = Provider.family<CragSummary?, String>((ref, cragId) {
+  return FakeDataService.instance.getCragById(cragId);
+});

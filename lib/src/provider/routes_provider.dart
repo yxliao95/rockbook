@@ -98,6 +98,15 @@ final allRoutesProvider = Provider<List<ClimbRoute>>((ref) {
   return FakeDataService.instance.getRoutes();
 });
 
+final routeByIdProvider = Provider.family<ClimbRoute?, String>((ref, routeId) {
+  final matches = ref.watch(allRoutesProvider).where((route) => route.id == routeId);
+  return matches.isEmpty ? null : matches.first;
+});
+
+final routesByCragProvider = Provider.family<List<ClimbRoute>, String>((ref, cragId) {
+  return ref.watch(allRoutesProvider).where((route) => route.cragId == cragId).toList();
+});
+
 final filteredRoutesProvider = Provider<List<ClimbRoute>>((ref) {
   final state = ref.watch(routesFilterProvider);
   final routes = ref.watch(allRoutesProvider);
