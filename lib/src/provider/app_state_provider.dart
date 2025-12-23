@@ -20,8 +20,6 @@ final currentTabIndexProvider = Provider<int>((ref) => ref.watch(appStateProvide
 
 /// 全局应用状态
 /// 用户在应用中的状态
-/// 初次打开应用时，没有已选择的岩馆，因此在线路页面会提示用户选择岩馆，在岩馆页面则默认打开岩馆列表
-/// 用户选择岩馆后，状态更新，线路页面显示所选岩馆的线路区域，岩馆页面显示所选岩馆的信息
 class AppStateNotifier extends Notifier<AppStateModel> {
   // Notifier 是 Riverpod 的概念性接口
   // state 的类型就是 AppStateModel。Notifier 的 state 是同步值；AsyncNotifier 的 state 是 AsyncValue<T>。
