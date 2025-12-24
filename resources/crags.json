@@ -1,0 +1,1784 @@
+[
+    {
+        "name": "安徽 Anhui",
+        "subtype": null,
+        "children": [
+            {
+                "name": "萧县天门寺",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "蚌埠梅花山",
+                "subtype": "region",
+                "children": []
+            },
+            {
+                "name": "合肥茶壶山",
+                "subtype": "cliff",
+                "children": []
+            },
+            {
+                "name": "芜湖",
+                "subtype": "area",
+                "children": [
+                    {
+                        "name": "芜湖繁昌戴店",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "南陵笔架山",
+                        "subtype": "crag",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "name": "宣城市",
+                "subtype": "area",
+                "children": [
+                    {
+                        "name": "宣城泾县狮子山",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "宣城市溪口镇金狮洞",
+                        "subtype": "area",
+                        "children": []
+                    },
+                    {
+                        "name": "板桥大石壁",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "绩溪饭甑尖",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "障山大峡谷",
+                        "subtype": "area",
+                        "children": []
+                    },
+                    {
+                        "name": "绩溪龙须山",
+                        "subtype": "field",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "name": "安庆坦埠",
+                "subtype": "crag",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "北京 Beijing",
+        "subtype": null,
+        "children": [
+            {
+                "name": "白河 Baihe",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "昌平 Changping District",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "海淀 Haidian District",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "房山 Fangshan District",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "门头沟 Mentougou District",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "延庆 Yanqing District",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "怀柔 Huairou District",
+                "subtype": "area",
+                "children": []
+            },
+            {}
+        ]
+    },
+    {
+        "name": "重庆 Chongqing",
+        "subtype": null,
+        "children": [
+            {
+                "name": "石林寺",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "南川石板沟",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "⽔江反壁岩",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "水江天成岩",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "御临河",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "猫儿峡",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "奉节县白帝城",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "涪陵鹦哥洞",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "窑湾森林公园",
+                "subtype": "field",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "福建 Fujian",
+        "subtype": null,
+        "children": [
+            {
+                "name": "福州 Fuzhou",
+                "subtype": "area",
+                "children": [
+                    {
+                        "name": "连江县古石村",
+                        "subtype": "area",
+                        "children": [
+                            {
+                                "name": "古石村岩场",
+                                "subtype": "area",
+                                "children": []
+                            },
+                            {
+                                "name": "岩场",
+                                "subtype": "area",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "罗源 Luo Yuan",
+                        "subtype": "area",
+                        "children": [
+                            {
+                                "name": "罗源县起步镇鹰嘴岩",
+                                "subtype": "area",
+                                "children": []
+                            },
+                            {
+                                "name": "罗源县八井村",
+                                "subtype": "crag",
+                                "children": []
+                            },
+                            {
+                                "name": "罗源县茅山村",
+                                "subtype": "crag",
+                                "children": []
+                            },
+                            {
+                                "name": "罗源县管柄村圆通寺",
+                                "subtype": "area",
+                                "children": []
+                            },
+                            {
+                                "name": "罗源县下楼海边岩场",
+                                "subtype": "field",
+                                "children": []
+                            },
+                            {
+                                "name": "罗源县圣塘村",
+                                "subtype": "crag",
+                                "children": []
+                            },
+                            {
+                                "name": "罗源县廪头岩场 Luo Yuan Lin Tou Cliff",
+                                "subtype": "area",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "磨溪攀岩公园 Mo Xi Climbing Park",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "粗芦岛龙沙",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "琅岐岛龙王洞",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "马尾区牛栏坑岩场",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "连江县北茭村",
+                        "subtype": "cliff",
+                        "children": []
+                    },
+                    {
+                        "name": "福清镜洋下施红旗渠 Red Flag Canal Cliff",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "长乐漳港海边岩场 Chang Le Zhang Gang Cliff",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "长乐象鼻澳海滩",
+                        "subtype": "area",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "name": "泉州 Quanzhou",
+                "subtype": "crag",
+                "children": [
+                    {
+                        "name": "崇武簸箕湾",
+                        "subtype": "field",
+                        "children": []
+                    },
+                    {
+                        "name": "泉州桃源",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "鸡母石",
+                        "subtype": "field",
+                        "children": []
+                    },
+                    {
+                        "name": "清源山",
+                        "subtype": "field",
+                        "children": []
+                    },
+                    {
+                        "name": "紫帽山",
+                        "subtype": "boulder",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "name": "漳州",
+                "subtype": "crag",
+                "children": [
+                    {
+                        "name": "南太武 Nantaiwu",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "尖山",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "鼎仔内",
+                        "subtype": "area",
+                        "children": []
+                    },
+                    {
+                        "name": "乌鼻头角",
+                        "subtype": "area",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "name": "厦门云顶山",
+                "subtype": "crag",
+                "children": [
+                    {
+                        "name": "后花园",
+                        "subtype": "cliff",
+                        "children": []
+                    },
+                    {
+                        "name": "秘密花园",
+                        "subtype": "cliff",
+                        "children": []
+                    },
+                    {
+                        "name": "儿童乐园",
+                        "subtype": "cliff",
+                        "children": []
+                    },
+                    {
+                        "name": "鹰谷",
+                        "subtype": "cliff",
+                        "children": []
+                    },
+                    {
+                        "name": "光明墙",
+                        "subtype": "cliff",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "name": "厦门岛内",
+                "subtype": "boulder",
+                "children": [
+                    {
+                        "name": "云顶6号",
+                        "subtype": "area",
+                        "children": []
+                    },
+                    {
+                        "name": "碧玉寺",
+                        "subtype": "area",
+                        "children": []
+                    },
+                    {
+                        "name": "曾山",
+                        "subtype": "area",
+                        "children": []
+                    },
+                    {
+                        "name": "金榜公园",
+                        "subtype": "area",
+                        "children": []
+                    },
+                    {
+                        "name": "忠仑公园",
+                        "subtype": "area",
+                        "children": []
+                    }
+                ]
+            },
+            {}
+        ]
+    },
+    {
+        "name": "甘肃 Gansu",
+        "subtype": null,
+        "children": [
+            {
+                "name": "平凉华亭王峡口一线天岩场",
+                "subtype": null,
+                "children": []
+            },
+            {
+                "name": "迭部",
+                "subtype": null,
+                "children": [
+                    {
+                        "name": "扎尕那 Zhagana",
+                        "subtype": "crag",
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "广东 Guangdong",
+        "subtype": null,
+        "children": [
+            {
+                "name": "清远英西 YingXi",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "白云山 Bai Yun Hill",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "广州龙洞 Guangzhou Dragon Cave",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "广州龙头山Guangzhou Dragon Head Mt.",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "深圳 Shenzhen",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "春湾 Chun Wan",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "珠海 Zhuhai",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "汕头杭美岩场",
+                "subtype": "field",
+                "children": []
+            },
+            {
+                "name": "中山北台",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "肇庆怀集",
+                "subtype": "area",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "广西 Guangxi",
+        "subtype": null,
+        "children": [
+            {
+                "name": "乐业 Leye",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "桂林 GuiLin",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "阳朔 Yangshuo",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "平乐青龙月亮山 Qinglong Arch",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "恭城 Gongcheng",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "柳州 Liuzhou",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "马山 MaShan",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "南宁 Nanning",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "北流 BeiLiu",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "灵山燕子洞",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "凤山 Fengshan",
+                "subtype": "area",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "贵州 Guizhou",
+        "subtype": null,
+        "children": [
+            {
+                "name": "六盘水 Liupanshui",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "安顺市",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "贵阳市",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "黔南州",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "遵义Zunyi",
+                "subtype": "area",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "海南 Hainan",
+        "subtype": null,
+        "children": [
+            {
+                "name": "三亚落笔洞",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "石头公园",
+                "subtype": "field",
+                "children": []
+            },
+            {
+                "name": "琼海白石岭",
+                "subtype": "field",
+                "children": []
+            },
+            {
+                "name": "万宁地区 Wanning area",
+                "subtype": "area",
+                "children": []
+            },
+            {},
+            {
+                "name": "陵水 香水湾10号沙滩",
+                "subtype": "field",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "河北 Hebei",
+        "subtype": null,
+        "children": [
+            {
+                "name": "邢台魔石岩场",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "唐山半壁山",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "秦皇岛",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "冰山梁 Bing Shan Liang",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "小五台 Xiaowutai Mountain",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "邯郸鼓山",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "张家口",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "兴隆雾灵山仙人塔",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "冻凌背",
+                "subtype": "crag",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "黑龙江 Heilongjiang",
+        "subtype": null,
+        "children": [
+            {
+                "name": "哈尔滨 Harbin",
+                "subtype": "area",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "河南 Henan",
+        "subtype": null,
+        "children": [
+            {
+                "name": "万仙山 Wanxian Mountains",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "登封",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "安阳林州黑龙潭冰瀑",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "洛阳下岸岩场",
+                "subtype": "crag",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "湖北 Hubei",
+        "subtype": null,
+        "children": [
+            {
+                "name": "黄石",
+                "subtype": "area",
+                "children": [
+                    {
+                        "name": "草甸",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "李家坊",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "西洞",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "黄钻",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "蓝钻",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "白塔岩",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "小雷山",
+                        "subtype": "crag",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "name": "咸宁",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "恩施 Enshi",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "襄阳",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "宜昌",
+                "subtype": "area",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "湖南 Hunan",
+        "subtype": null,
+        "children": [
+            {
+                "name": "张家界槟榔谷",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "慈利渔泉溪",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "娄底湄江",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "郴州穿岩岭",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "宁乡黄材岩场",
+                "subtype": "crag",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "内蒙古 Inner Mongolia",
+        "subtype": null,
+        "children": [
+            {
+                "name": "石条山",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "赤峰勃隆克",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "呼和浩特红召",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "大青山",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "土左旗楼房沟",
+                "subtype": "crag",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "辽宁 Liaoning",
+        "subtype": null,
+        "children": [
+            {
+                "name": "沈阳",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "大连",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "鞍山",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "本溪榆树下",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "辽阳",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "铁岭",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "义县碾盘沟圣旨峰岩场",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "葫芦岛市建昌县",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "丹东响水寺冰瀑",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "本溪滴水湖冰瀑",
+                "subtype": "cliff",
+                "children": []
+            },
+            {
+                "name": "本溪南甸",
+                "subtype": "crag",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "江苏 Jiangsu",
+        "subtype": null,
+        "children": [
+            {
+                "name": "徐州",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "南京",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "镇江",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "苏州",
+                "subtype": "area",
+                "children": []
+            },
+            {},
+            {
+                "name": "常熟虞山 Changshu-Yushan",
+                "subtype": "area",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "江西 Jiangxi",
+        "subtype": null,
+        "children": [
+            {
+                "name": "九江石钟山",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "东浒寨飞拉达",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "宜春洪塘",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "分宜洞村乡",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "红枫石城",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "南昌梅岭",
+                "subtype": "region",
+                "children": []
+            },
+            {
+                "name": "玉华山",
+                "subtype": "field",
+                "children": []
+            },
+            {
+                "name": "三江村深谭",
+                "subtype": "area",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "吉林 Jilin",
+        "subtype": null,
+        "children": [
+            {
+                "name": "临江七道沟",
+                "subtype": "crag",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "宁夏 NingXia",
+        "subtype": null,
+        "children": [
+            {
+                "name": "贺兰山滚钟口攀岩场",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "贺兰山大峰沟",
+                "subtype": "crag",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "青海 QingHai",
+        "subtype": null,
+        "children": [
+            {
+                "name": "年保玉则 Nianbaoyuze",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "西宁大通祁汉沟 阳光岩场",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "岗什卡地区",
+                "subtype": "area",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "陕西 Shaanxi",
+        "subtype": null,
+        "children": [
+            {
+                "name": "大峪 Dayu",
+                "subtype": "area",
+                "children": [
+                    {
+                        "name": "老鹰岩",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "狮子茅棚",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "拴马桩",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "西翠花",
+                        "subtype": "field",
+                        "children": []
+                    },
+                    {
+                        "name": "茄子山",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "九仙阁",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "天水岩",
+                        "subtype": "crag",
+                        "children": [
+                            {
+                                "name": "天水岩A区",
+                                "subtype": "crag",
+                                "children": []
+                            },
+                            {
+                                "name": "天水岩C区",
+                                "subtype": "crag",
+                                "children": []
+                            },
+                            {
+                                "name": "天水岩D区",
+                                "subtype": "area",
+                                "children": []
+                            },
+                            {
+                                "name": "天水岩E区",
+                                "subtype": "crag",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "秘密花园",
+                        "subtype": "area",
+                        "children": [
+                            {
+                                "name": "龙潭A区",
+                                "subtype": "field",
+                                "children": [
+                                    {
+                                        "name": "A1",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "A2",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "A3",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "A4",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "A5",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "A6",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "A7",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "A8",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "A9",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "龙潭B区",
+                                "subtype": "field",
+                                "children": [
+                                    {
+                                        "name": "B1",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "B2",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "B3",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "B4",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "B5",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "B6",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "B7",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "B8",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "B9",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "B10",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "龙潭C区",
+                                "subtype": "field",
+                                "children": [
+                                    {
+                                        "name": "C1",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C2",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C3+",
+                                        "subtype": "field",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C3",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C4",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C5",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C6",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C7",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C8",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C9",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C10",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C11",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C12",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C13",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C14",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C15",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C16",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C17",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C18",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C19",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C19右边",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C20",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C21",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C22",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C23",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C24",
+                                        "subtype": "area",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C25",
+                                        "subtype": "area",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C26",
+                                        "subtype": "area",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C27",
+                                        "subtype": "area",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C28",
+                                        "subtype": "area",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C29",
+                                        "subtype": "area",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C30",
+                                        "subtype": "area",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C31",
+                                        "subtype": "area",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C32",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    },
+                                    {
+                                        "name": "C33",
+                                        "subtype": "boulder",
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "龙潭D区",
+                                "subtype": "field",
+                                "children": []
+                            },
+                            {
+                                "name": "虎穴区",
+                                "subtype": "field",
+                                "children": []
+                            },
+                            {
+                                "name": "狼窝区",
+                                "subtype": "field",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "翠华山",
+                        "subtype": "crag",
+                        "children": []
+                    },
+                    {
+                        "name": "河道边",
+                        "subtype": "field",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "name": "沣峪口",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "大夫峪",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "天子峪",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "华山 Mount Hua",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "小峪",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "洋峪",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "流峪飞峡",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "涝峪黑山岔",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "南宫山飞拉达",
+                "subtype": "crag",
+                "children": []
+            },
+            {},
+            {},
+            {},
+            {},
+            {},
+            {
+                "name": "商洛",
+                "subtype": "area",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "山东 Shandong",
+        "subtype": null,
+        "children": []
+    },
+    {
+        "name": "上海 Shanghai",
+        "subtype": null,
+        "children": [
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+        ]
+    },
+    {
+        "name": "山西 Shanxi",
+        "subtype": null,
+        "children": [
+            {
+                "name": "黎城洗耳河",
+                "subtype": "crag",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "四川 Sichuan",
+        "subtype": null,
+        "children": [
+            {
+                "name": "江油腰悬岩",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "德阳古店乡 Gudian Village",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "葛仙山 Gexian Mountain",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "大邑鹤鸣山 He Ming Mountain",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "都江堰",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "乐山",
+                "subtype": "region",
+                "children": []
+            },
+            {
+                "name": "宜宾-水富金沙江",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "宜宾巡场岩",
+                "subtype": "cliff",
+                "children": []
+            },
+            {
+                "name": "泸州叙永",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "内江市威远县永兴村",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "稻城 Dao Cheng",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "雪宝顶地区",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "雪隆包地区",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "四姑娘山地区",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "西岭雪山地区",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "夹金山地区",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "夏羌拉地区",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "雅拉-莲花雪山地区",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "贡嘎山地区",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "仁宗雪山地区",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "卡瓦洛日地区",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "雀儿山地区",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "夏塞峰-扎金甲博地区",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "格聂山地区",
+                "subtype": "area",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "天津 Tianjin",
+        "subtype": null,
+        "children": [
+            {
+                "name": "盘山",
+                "subtype": "area",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "西藏 Tibet",
+        "subtype": null,
+        "children": [
+            {
+                "name": "林芝",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "夺底岩场 Lhasa Serra Cliff",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "巴次普峰 Bartse Ri",
+                "subtype": "area",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "新疆 Xinjiang",
+        "subtype": null,
+        "children": [
+            {
+                "name": "乌鲁木齐 Urumchi",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "可可托海 Keketuohai",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "阔克苏峡谷",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "玛纳斯河冰壁",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "乌苏巴音沟冰壁",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "库尔勒阿诗玛冰壁",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "哈密红山冰壁",
+                "subtype": "crag",
+                "children": []
+            },
+            {
+                "name": "友谊峰地区",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "天堂湖地区",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "阿勒泰地区吉木乃县",
+                "subtype": "area",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "云南 Yunnan",
+        "subtype": null,
+        "children": [
+            {
+                "name": "滇西地区",
+                "subtype": "region",
+                "children": []
+            },
+            {
+                "name": "昆明 Kunming",
+                "subtype": "region",
+                "children": []
+            },
+            {
+                "name": "西双版纳",
+                "subtype": "area",
+                "children": []
+            },
+            {
+                "name": "滇东南地区",
+                "subtype": "region",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "浙江 Zhejiang",
+        "subtype": null,
+        "children": [
+            {
+                "name": "小洋山",
+                "subtype": "field",
+                "children": []
+            },
+            {
+                "name": "杭州 Hangzhou",
+                "subtype": "region",
+                "children": []
+            },
+            {
+                "name": "绍兴 Shaoxing",
+                "subtype": "region",
+                "children": []
+            },
+            {
+                "name": "宁波 Ningbo",
+                "subtype": "region",
+                "children": []
+            },
+            {
+                "name": "台州 Taizhou",
+                "subtype": "region",
+                "children": []
+            },
+            {
+                "name": "衢州 Quzhou",
+                "subtype": "region",
+                "children": []
+            },
+            {
+                "name": "金华",
+                "subtype": "region",
+                "children": []
+            },
+            {
+                "name": "温州 Wenzhou",
+                "subtype": "region",
+                "children": []
+            },
+            {
+                "name": "舟山 Zhoushan",
+                "subtype": "region",
+                "children": []
+            },
+            {
+                "name": "丽水",
+                "subtype": "region",
+                "children": []
+            }
+        ]
+    }
+]
