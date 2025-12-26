@@ -26,3 +26,9 @@ views 直接调用 services
 
 - 使用 Flutter 进行跨平台开发。
 - 每次更新完成后，修改内容应该总结在 docs/agent_logs.md 里。使用中文。使用二级标题，标题为当前git分支的名称。
+
+## 规范及版本接口
+
+- Riverpod 3 中移除的 valueOrNull 应该替换为 asData?.value。
+- DropdownButtonFormField 已经不再推荐使用 value + onChanged 的组合，应该使用 initialValue 来代替 value。
+- Unnecessary use of multiple underscores. Try using '_'.

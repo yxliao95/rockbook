@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'provider/app_state_provider.dart';
+import 'views/account/account_view.dart';
 import 'views/crags/crags_view.dart';
 import 'views/logbook/logbook_view.dart';
-import 'views/routes/routes_view.dart';
 import 'views/map/map_view.dart';
+import 'views/routes/routes_view.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key}); // ← 添加 const 关键字
@@ -36,6 +37,7 @@ class MainPage extends ConsumerWidget {
     RoutesPage(), // 线路页面
     LogbookPage(), // 记录页面
     MapPage(), // 地图页面
+    AccountPage(), // 账号页面
   ];
 
   @override
@@ -62,12 +64,17 @@ class MainPage extends ConsumerWidget {
           NavigationDestination(
             selectedIcon: Icon(Icons.edit_note, color: theme.colorScheme.onSecondary),
             icon: Icon(Icons.edit_note),
-            label: '记录',
+            label: '个人记录',
           ),
           NavigationDestination(
             selectedIcon: Icon(Icons.map, color: theme.colorScheme.onSecondary),
             icon: Icon(Icons.map),
             label: '地图',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.person, color: theme.colorScheme.onSecondary),
+            icon: Icon(Icons.person_outline),
+            label: '账号',
           ),
         ],
         indicatorColor: theme.colorScheme.secondary,
