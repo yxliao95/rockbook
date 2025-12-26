@@ -14,3 +14,15 @@
 - 修正 NotifierProvider 的构造方式以匹配 Riverpod 2 类型签名。
 - 新增线路记录模型与记录状态 Provider，支持创建与编辑记录。
 - 新增线路记录弹窗及查看线路入口，线路/日志列表支持点击记录或编辑。
+- 新增地区/岩场/岩壁/线路的新模型与资源数据服务，支持多级地区结构。
+- 重构岩场页面为层级浏览，地区与岩场分区展示并显示线路统计。
+- 重构线路筛选与岩场详情以适配新数据结构与资源加载。
+
+## feat/data-structure
+
+- 将 Riverpod 3 中移除的 valueOrNull 替换为 asData?.value，避免 Provider 读取报错。
+
+## feat/data-structure
+
+- 新增数据加载与 Provider 读取的单元测试，覆盖资源解析与关联关系校验。
+- 在应用入口初始化 WidgetsBinding，避免资源加载时未初始化导致的错误。

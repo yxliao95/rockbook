@@ -22,7 +22,7 @@ class LogbookPage extends ConsumerWidget {
     return ListView.separated(
       padding: const EdgeInsets.all(16),
       itemCount: logs.length,
-      separatorBuilder: (_, __) => const Divider(height: 24),
+      separatorBuilder: (_, _) => const Divider(height: 24),
       itemBuilder: (context, index) {
         final log = logs[index];
         return _LogbookRow(log: log);
