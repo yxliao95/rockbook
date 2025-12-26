@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:rockbook/src/provider/crags_provider.dart';
-import 'package:rockbook/src/provider/routes_provider.dart';
 import 'package:rockbook/src/services/crag_data_service.dart';
 
 Future<void> main() async {

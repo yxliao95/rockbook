@@ -63,4 +63,40 @@ class ClimbRoute {
     this.isMultiPitch = false,
     this.pitches = const [],
   });
+
+  ClimbRoute copyWith({
+    String? id,
+    String? cragId,
+    String? wallId,
+    int? order,
+    String? name,
+    String? grade,
+    RouteDiscipline? discipline,
+    int? quickdraws,
+    int? heightMeters,
+    String? style,
+    String? description,
+    String? setter,
+    String? firstAscent,
+    bool? isMultiPitch,
+    List<RoutePitch>? pitches,
+  }) {
+    return ClimbRoute(
+      id: id ?? this.id,
+      cragId: cragId ?? this.cragId,
+      wallId: wallId ?? this.wallId,
+      order: order ?? this.order,
+      name: name ?? this.name,
+      grade: grade ?? this.grade,
+      discipline: discipline ?? this.discipline,
+      quickdraws: quickdraws ?? this.quickdraws,
+      heightMeters: heightMeters ?? this.heightMeters,
+      style: style ?? this.style,
+      description: description ?? this.description,
+      setter: setter ?? this.setter,
+      firstAscent: firstAscent ?? this.firstAscent,
+      isMultiPitch: isMultiPitch ?? this.isMultiPitch,
+      pitches: pitches ?? this.pitches,
+    );
+  }
 }

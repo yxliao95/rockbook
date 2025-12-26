@@ -551,6 +551,10 @@ class CragDataService {
     return relations;
   }
 
+  static List<RegionRelation> buildRelations(List<RegionNode> regions) {
+    return _buildRelations(regions);
+  }
+
   static RouteDiscipline _parseDiscipline(String raw) {
     final value = raw.toLowerCase();
     if (value.contains('trad')) return RouteDiscipline.trad;

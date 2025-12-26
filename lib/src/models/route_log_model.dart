@@ -24,31 +24,43 @@ enum AscentType {
 class RouteLog {
   final String id;
   final String routeId;
+  final String userId;
   final DateTime dateTime;
   final ClimbType climbType;
   final AscentType ascentType;
+  final String? belayerName;
+  final String? belayerUserId;
 
   const RouteLog({
     required this.id,
     required this.routeId,
+    required this.userId,
     required this.dateTime,
     required this.climbType,
     required this.ascentType,
+    this.belayerName,
+    this.belayerUserId,
   });
 
   RouteLog copyWith({
     String? id,
     String? routeId,
+    String? userId,
     DateTime? dateTime,
     ClimbType? climbType,
     AscentType? ascentType,
+    String? belayerName,
+    String? belayerUserId,
   }) {
     return RouteLog(
       id: id ?? this.id,
       routeId: routeId ?? this.routeId,
+      userId: userId ?? this.userId,
       dateTime: dateTime ?? this.dateTime,
       climbType: climbType ?? this.climbType,
       ascentType: ascentType ?? this.ascentType,
+      belayerName: belayerName ?? this.belayerName,
+      belayerUserId: belayerUserId ?? this.belayerUserId,
     );
   }
 }

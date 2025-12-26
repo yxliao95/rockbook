@@ -70,6 +70,24 @@ class Wall {
     this.panoramaImage,
     this.approachDescription,
   });
+
+  Wall copyWith({
+    String? id,
+    String? cragId,
+    String? name,
+    WallType? type,
+    String? panoramaImage,
+    String? approachDescription,
+  }) {
+    return Wall(
+      id: id ?? this.id,
+      cragId: cragId ?? this.cragId,
+      name: name ?? this.name,
+      type: type ?? this.type,
+      panoramaImage: panoramaImage ?? this.panoramaImage,
+      approachDescription: approachDescription ?? this.approachDescription,
+    );
+  }
 }
 
 class GradeCount {
@@ -113,4 +131,40 @@ class Crag {
     this.mapImage,
     this.weatherSummary,
   });
+
+  Crag copyWith({
+    String? id,
+    String? regionId,
+    String? name,
+    String? rockType,
+    String? approachTime,
+    String? exposure,
+    String? approachMethod,
+    String? parking,
+    String? mainEntrance,
+    String? recommendedApproach,
+    String? wallOverview,
+    String? overviewImage,
+    List<String>? wallImages,
+    String? mapImage,
+    String? weatherSummary,
+  }) {
+    return Crag(
+      id: id ?? this.id,
+      regionId: regionId ?? this.regionId,
+      name: name ?? this.name,
+      rockType: rockType ?? this.rockType,
+      approachTime: approachTime ?? this.approachTime,
+      exposure: exposure ?? this.exposure,
+      approachMethod: approachMethod ?? this.approachMethod,
+      parking: parking ?? this.parking,
+      mainEntrance: mainEntrance ?? this.mainEntrance,
+      recommendedApproach: recommendedApproach ?? this.recommendedApproach,
+      wallOverview: wallOverview ?? this.wallOverview,
+      overviewImage: overviewImage ?? this.overviewImage,
+      wallImages: wallImages ?? this.wallImages,
+      mapImage: mapImage ?? this.mapImage,
+      weatherSummary: weatherSummary ?? this.weatherSummary,
+    );
+  }
 }
