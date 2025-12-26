@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../models/crag_model.dart';
+import '../../models/region_model.dart';
 import '../../provider/crags_provider.dart';
 import 'crag_routes_view.dart';
 
@@ -12,14 +12,17 @@ class CragDetailPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final CragDetail? detail = ref.watch(cragDetailProvider(cragId));
+    final Crag? crag = ref.watch(cragByIdProvider(cragId));
+    final summary = ref.watch(cragSummaryProvider(cragId));
+    final gradeDistribution = ref.watch(cragGradeDistributionProvider(cragId));
+    final walls = ref.watch(wallsByCragProvider(cragId));
 
-    if (detail == null) {
+    if (crag == null) {
       return const Scaffold(body: Center(child: Text('未找到岩场信息')));
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text(detail.name)),
+      appBar: AppBar(title: Text(crag.name)),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -27,7 +30,7 @@ class CragDetailPage extends ConsumerWidget {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (_) => CragRoutesPage(cragId: detail.id, cragName: detail.name),
+                  builder: (_) => CragRoutesPage(cragId: crag.id, cragName: crag.name),
                 ),
               );
             },
@@ -37,52 +40,57 @@ class CragDetailPage extends ConsumerWidget {
           _InfoSection(
             title: '基础信息',
             children: [
-              _InfoRow(label: '石头类型', value: detail.rockType),
-              _InfoRow(label: '预计接近时间', value: detail.approachTime),
-              _InfoRow(label: '岩场暴露程度', value: detail.exposure),
-              _InfoRow(label: '接近方式', value: detail.approachMethod),
-              _InfoRow(label: '停车位置', value: detail.parking),
-              _InfoRow(label: '岩壁', value: detail.wallType),
+              _InfoRow(label: '石头类型', value: crag.rockType),
+              _InfoRow(label: '预计接近时间', value: crag.approachTime),
+              _InfoRow(label: '岩场暴露程度', value: crag.exposure),
+              _InfoRow(label: '接近方式', value: crag.approachMethod),
+              _InfoRow(label: '停车位置', value: crag.parking),
+              _InfoRow(label: '岩壁', value: _wallNames(walls)),
             ],
           ),
           const SizedBox(height: 16),
           _InfoSection(
             title: '线路信息',
             children: [
-              _InfoRow(label: '线路数量', value: detail.routeCount.toString()),
-              _InfoRow(label: '等级范围', value: detail.gradeRange),
-              _GradeDistributionList(items: detail.gradeDistribution),
+              _InfoRow(label: '线路数量', value: summary.routeCount.toString()),
+              _InfoRow(label: '等级范围', value: summary.gradeRange),
+              _GradeDistributionList(items: gradeDistribution),
             ],
           ),
           const SizedBox(height: 16),
           _InfoSection(
             title: '岩场概览图',
             children: [
-              _ImagePlaceholder(label: detail.overviewImage),
+              _ImagePlaceholder(label: crag.overviewImage),
             ],
           ),
           const SizedBox(height: 16),
           _InfoSection(
             title: '岩壁图集',
-            children: detail.wallImages.map((image) => _ImagePlaceholder(label: image)).toList(),
+            children: crag.wallImages.map((image) => _ImagePlaceholder(label: image)).toList(),
           ),
           const SizedBox(height: 16),
           _InfoSection(
             title: '地图',
             children: [
-              _ImagePlaceholder(label: detail.mapImage),
+              _ImagePlaceholder(label: crag.mapImage),
             ],
           ),
           const SizedBox(height: 16),
           _InfoSection(
             title: '天气预报',
             children: [
-              Text(detail.weatherSummary, style: Theme.of(context).textTheme.bodyMedium),
+              Text(crag.weatherSummary ?? '暂无', style: Theme.of(context).textTheme.bodyMedium),
             ],
           ),
         ],
       ),
     );
+  }
+
+  String _wallNames(List<Wall> walls) {
+    if (walls.isEmpty) return '暂无';
+    return walls.map((wall) => wall.name).join('、');
   }
 }
 
@@ -107,7 +115,7 @@ class _InfoSection extends StatelessWidget {
 
 class _InfoRow extends StatelessWidget {
   final String label;
-  final String value;
+  final String? value;
 
   const _InfoRow({required this.label, required this.value});
 
@@ -119,7 +127,7 @@ class _InfoRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(width: 110, child: Text(label, style: Theme.of(context).textTheme.bodyMedium)),
-          Expanded(child: Text(value, style: Theme.of(context).textTheme.bodyMedium)),
+          Expanded(child: Text(value ?? '暂无', style: Theme.of(context).textTheme.bodyMedium)),
         ],
       ),
     );
@@ -152,7 +160,7 @@ class _GradeDistributionList extends StatelessWidget {
 }
 
 class _ImagePlaceholder extends StatelessWidget {
-  final String label;
+  final String? label;
 
   const _ImagePlaceholder({required this.label});
 
@@ -166,7 +174,7 @@ class _ImagePlaceholder extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       alignment: Alignment.center,
-      child: Text(label, style: Theme.of(context).textTheme.bodySmall),
+      child: Text(label ?? '暂无图片', style: Theme.of(context).textTheme.bodySmall),
     );
   }
 }

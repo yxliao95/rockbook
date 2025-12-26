@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../models/crag_model.dart';
 import '../../provider/crags_provider.dart';
 import '../../provider/routes_provider.dart';
 import '../common/route_log_dialog.dart';
@@ -38,10 +37,7 @@ class RoutesPage extends ConsumerWidget {
       widgets.add(
         Padding(
           padding: const EdgeInsets.only(top: 16, bottom: 8),
-          child: Text(
-            '${group.province.name}-${group.region.name}',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+          child: Text(group.title, style: Theme.of(context).textTheme.titleMedium),
         ),
       );
       for (final cragGroup in group.crags) {
@@ -55,7 +51,10 @@ class RoutesPage extends ConsumerWidget {
           cragGroup.routes.map(
             (route) => InkWell(
               onTap: () {
-                showDialog(context: context, builder: (_) => RouteLogDialog(route: route));
+                showDialog(
+                  context: context,
+                  builder: (_) => RouteLogDialog(route: route),
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 6),
@@ -100,11 +99,7 @@ class _RoutesToolbar extends ConsumerWidget {
             icon: const Icon(Icons.filter_alt_outlined),
             label: const Text('过滤'),
             onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                showDragHandle: true,
-                builder: (_) => const _RouteFilterSheet(),
-              );
+              showModalBottomSheet(context: context, showDragHandle: true, builder: (_) => const _RouteFilterSheet());
             },
           ),
         ],
@@ -118,69 +113,67 @@ class _CragSelectDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provinces = ref.watch(provincesProvider);
     final filterNotifier = ref.read(routesFilterProvider.notifier);
+    final rootChildren = ref.watch(regionChildrenProvider(null));
 
     return AlertDialog(
       title: const Text('选择岩场'),
       content: SizedBox(
         width: double.maxFinite,
-        child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: provinces.length,
-          itemBuilder: (context, index) {
-            final province = provinces[index];
-            final regions = ref.watch(regionsByProvinceProvider(province.id));
-
-            return ExpansionTile(
-              title: Text(province.name),
-              children: regions
-                  .map(
-                    (region) => _RegionCragSelector(
-                      region: region,
-                    ),
-                  )
+        child: rootChildren.when(
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (_, _) => const Center(child: Text('加载失败')),
+          data: (children) {
+            return ListView(
+              shrinkWrap: true,
+              children: children.regions
+                  .map((region) => _RegionCragSelector(regionId: region.id, title: region.name))
                   .toList(),
             );
           },
         ),
       ),
       actions: [
-        TextButton(
-          onPressed: filterNotifier.clearCrags,
-          child: const Text('清空'),
-        ),
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: const Text('完成'),
-        ),
+        TextButton(onPressed: filterNotifier.clearCrags, child: const Text('清空')),
+        TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('完成')),
       ],
     );
   }
 }
 
 class _RegionCragSelector extends ConsumerWidget {
-  final Region region;
+  final String regionId;
+  final String title;
 
-  const _RegionCragSelector({required this.region});
+  const _RegionCragSelector({required this.regionId, required this.title});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final crags = ref.watch(cragsByRegionProvider(region.id));
+    final children = ref.watch(regionChildrenProvider(regionId));
     final selectedCragIds = ref.watch(routesFilterProvider.select((state) => state.selectedCragIds));
     final filterNotifier = ref.read(routesFilterProvider.notifier);
+
     return ExpansionTile(
-      title: Text(region.name),
-      children: crags
-          .map(
-            (crag) => CheckboxListTile(
-              value: selectedCragIds.contains(crag.id),
-              title: Text(crag.name),
-              controlAffinity: ListTileControlAffinity.leading,
-              onChanged: (_) => filterNotifier.toggleCrag(crag.id),
+      title: Text(title),
+      children: children.when(
+        loading: () => [const Padding(padding: EdgeInsets.all(12), child: CircularProgressIndicator())],
+        error: (_, _) => [const Padding(padding: EdgeInsets.all(12), child: Text('加载失败'))],
+        data: (value) {
+          final widgets = <Widget>[];
+          widgets.addAll(value.regions.map((region) => _RegionCragSelector(regionId: region.id, title: region.name)));
+          widgets.addAll(
+            value.crags.map(
+              (crag) => CheckboxListTile(
+                value: selectedCragIds.contains(crag.id),
+                title: Text(crag.name),
+                controlAffinity: ListTileControlAffinity.leading,
+                onChanged: (_) => filterNotifier.toggleCrag(crag.id),
+              ),
             ),
-          )
-          .toList(),
+          );
+          return widgets;
+        },
+      ),
     );
   }
 }
@@ -204,12 +197,7 @@ class _RouteFilterSheet extends ConsumerWidget {
             selected: state.grades,
             onTap: filterNotifier.toggleGrade,
           ),
-          _FilterSection(
-            title: '类型',
-            options: options.types,
-            selected: state.types,
-            onTap: filterNotifier.toggleType,
-          ),
+          _FilterSection(title: '类型', options: options.types, selected: state.types, onTap: filterNotifier.toggleType),
           _FilterSection(
             title: '风格',
             options: options.styles,
@@ -226,10 +214,7 @@ class _RouteFilterSheet extends ConsumerWidget {
           const SizedBox(height: 12),
           Align(
             alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: filterNotifier.clearFilters,
-              child: const Text('清空过滤'),
-            ),
+            child: TextButton(onPressed: filterNotifier.clearFilters, child: const Text('清空过滤')),
           ),
         ],
       ),

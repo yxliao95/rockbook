@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../models/crag_model.dart';
+import '../models/region_model.dart';
 import '../models/route_model.dart';
-import '../services/fake_data_service.dart';
+import '../provider/crags_provider.dart';
 
 class RouteFilterState {
   final Set<String> selectedCragIds;
@@ -95,16 +95,13 @@ class RoutesFilterNotifier extends Notifier<RouteFilterState> {
 final routesFilterProvider = NotifierProvider<RoutesFilterNotifier, RouteFilterState>(RoutesFilterNotifier.new);
 
 final allRoutesProvider = Provider<List<ClimbRoute>>((ref) {
-  return FakeDataService.instance.getRoutes();
+  final data = ref.watch(cragDataProvider).asData?.value;
+  return data?.routes ?? const [];
 });
 
 final routeByIdProvider = Provider.family<ClimbRoute?, String>((ref, routeId) {
   final matches = ref.watch(allRoutesProvider).where((route) => route.id == routeId);
   return matches.isEmpty ? null : matches.first;
-});
-
-final routesByCragProvider = Provider.family<List<ClimbRoute>, String>((ref, cragId) {
-  return ref.watch(allRoutesProvider).where((route) => route.cragId == cragId).toList();
 });
 
 final filteredRoutesProvider = Provider<List<ClimbRoute>>((ref) {
@@ -118,13 +115,13 @@ final filteredRoutesProvider = Provider<List<ClimbRoute>>((ref) {
     if (state.grades.isNotEmpty && !state.grades.contains(route.grade)) {
       return false;
     }
-    if (state.types.isNotEmpty && !state.types.contains(route.type)) {
+    if (state.types.isNotEmpty && !state.types.contains(route.discipline.label)) {
       return false;
     }
-    if (state.styles.isNotEmpty && !state.styles.contains(route.style)) {
+    if (state.styles.isNotEmpty && !state.styles.contains(route.style ?? '')) {
       return false;
     }
-    if (state.quickdraws.isNotEmpty && !state.quickdraws.contains(route.quickdraws)) {
+    if (state.quickdraws.isNotEmpty && !state.quickdraws.contains(route.quickdraws ?? -1)) {
       return false;
     }
     return true;
@@ -148,53 +145,46 @@ class RouteFilterOptions {
 final routeFilterOptionsProvider = Provider<RouteFilterOptions>((ref) {
   final routes = ref.watch(allRoutesProvider);
   final grades = routes.map((route) => route.grade).toSet().toList()..sort();
-  final types = routes.map((route) => route.type).toSet().toList()..sort();
-  final styles = routes.map((route) => route.style).toSet().toList()..sort();
-  final quickdraws = routes.map((route) => route.quickdraws).toSet().toList()..sort();
+  final types = routes.map((route) => route.discipline.label).toSet().toList()..sort();
+  final styles = routes.map((route) => route.style).whereType<String>().toSet().toList()..sort();
+  final quickdraws = routes.map((route) => route.quickdraws).whereType<int>().toSet().toList()..sort();
 
   return RouteFilterOptions(grades: grades, types: types, styles: styles, quickdraws: quickdraws);
 });
 
 class CragRouteGroup {
-  final CragSummary crag;
+  final Crag crag;
   final List<ClimbRoute> routes;
 
   const CragRouteGroup({required this.crag, required this.routes});
 }
 
 class RegionRouteGroup {
-  final Province province;
-  final Region region;
+  final String title;
   final List<CragRouteGroup> crags;
 
-  const RegionRouteGroup({required this.province, required this.region, required this.crags});
+  const RegionRouteGroup({required this.title, required this.crags});
 }
 
 final routeGroupsProvider = Provider<List<RegionRouteGroup>>((ref) {
+  final data = ref.watch(cragDataProvider).asData?.value;
+  if (data == null) return const [];
   final routes = ref.watch(filteredRoutesProvider);
-  final provinces = FakeDataService.instance.getProvinces();
   final groups = <RegionRouteGroup>[];
 
-  for (final province in provinces) {
-    final regions = FakeDataService.instance.getRegionsByProvince(province.id);
-    for (final region in regions) {
-      final crags = FakeDataService.instance.getCragsByRegion(region.id);
-      final cragGroups = <CragRouteGroup>[];
+  for (final region in data.regions) {
+    final crags = data.cragsByRegion(region.id);
+    if (crags.isEmpty) continue;
+    final cragGroups = <CragRouteGroup>[];
 
-      for (final crag in crags) {
-        final cragRoutes = routes.where((route) => route.cragId == crag.id).toList();
-        if (cragRoutes.isEmpty) {
-          continue;
-        }
-        cragGroups.add(CragRouteGroup(crag: crag, routes: cragRoutes));
-      }
-
-      if (cragGroups.isEmpty) {
-        continue;
-      }
-
-      groups.add(RegionRouteGroup(province: province, region: region, crags: cragGroups));
+    for (final crag in crags) {
+      final cragRoutes = routes.where((route) => route.cragId == crag.id).toList();
+      if (cragRoutes.isEmpty) continue;
+      cragGroups.add(CragRouteGroup(crag: crag, routes: cragRoutes));
     }
+
+    if (cragGroups.isEmpty) continue;
+    groups.add(RegionRouteGroup(title: data.regionPath(region.id), crags: cragGroups));
   }
 
   return groups;

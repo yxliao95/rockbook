@@ -4,9 +4,9 @@
 
 ## 项目架构设计
 
-使用 Flutter2.0 及以上版本开发，采用 Riverpod 作为状态管理方案。
+使用 Flutter2.0 及以上版本开发，采用 Riverpod3.x 作为状态管理方案。
 
-```
+```text
 lib/
 ├── main.dart
 ├── src/models/     // 数据模型

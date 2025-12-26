@@ -1,6 +1,7 @@
 enum ClimbType {
   lead,
   topRope,
+  follow,
   bouldering,
 }
 
@@ -8,8 +9,16 @@ enum AscentType {
   onsight,
   flash,
   redpoint,
-  dogged,
-  unfinished,
+  pinkpoint,
+  clean,
+  hangdog,
+  send,
+  repeat,
+  dab,
+  generalAscent,
+  attempt,
+  working,
+  retreat,
 }
 
 class RouteLog {
@@ -51,6 +60,8 @@ extension ClimbTypeLabel on ClimbType {
         return '先锋';
       case ClimbType.topRope:
         return '顶绳';
+      case ClimbType.follow:
+        return '跟攀';
       case ClimbType.bouldering:
         return '抱石';
     }
@@ -66,10 +77,26 @@ extension AscentTypeLabel on AscentType {
         return 'flash';
       case AscentType.redpoint:
         return '红点';
-      case AscentType.dogged:
-        return 'dogged';
-      case AscentType.unfinished:
-        return '未完成';
+      case AscentType.pinkpoint:
+        return '粉点';
+      case AscentType.clean:
+        return '干净完成';
+      case AscentType.hangdog:
+        return '挂点';
+      case AscentType.send:
+        return '完成';
+      case AscentType.repeat:
+        return '重复';
+      case AscentType.dab:
+        return '触地';
+      case AscentType.generalAscent:
+        return '完攀';
+      case AscentType.attempt:
+        return '尝试';
+      case AscentType.working:
+        return '磕线';
+      case AscentType.retreat:
+        return '下撤';
     }
   }
 }

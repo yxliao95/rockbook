@@ -25,7 +25,7 @@ class _RouteLogDialogState extends ConsumerState<RouteLogDialog> {
     super.initState();
     final initial = widget.initialLog;
     _dateTime = initial?.dateTime ?? DateTime.now();
-    _climbType = initial?.climbType ?? ClimbType.lead;
+    _climbType = initial?.climbType ?? _defaultClimbType();
     _ascentType = initial?.ascentType ?? AscentType.onsight;
   }
 
@@ -109,6 +109,13 @@ class _RouteLogDialogState extends ConsumerState<RouteLogDialog> {
       climbType: _climbType,
       ascentType: _ascentType,
     );
+  }
+
+  ClimbType _defaultClimbType() {
+    if (widget.route.discipline == RouteDiscipline.bouldering) {
+      return ClimbType.bouldering;
+    }
+    return ClimbType.lead;
   }
 
   String _formatDateTime(DateTime value) {
