@@ -30,9 +30,5 @@ conda install -n rockbook ipykernel --update-deps --force-reinstall
 
 pip install beautifulsoup4 lxml selenium webdriver-manager
 
-# Go to https://nodejs.org/zh-cn and install Node.js (which includes npm)
-# install playwright
-mkdir path
-cd path
-npm init playwright@latest
+pip install markdownify
 ```
