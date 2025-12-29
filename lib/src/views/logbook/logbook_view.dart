@@ -86,7 +86,9 @@ class _LogbookRow extends ConsumerWidget {
         subtitle: Text(_formatInfo(log)),
       );
     }
-    final crag = ref.watch(cragByIdProvider(route.cragId));
+    final data = ref.watch(cragDataProvider).asData?.value;
+    final cragId = data?.cragIdForRoute(route);
+    final crag = cragId == null ? null : ref.watch(cragByIdProvider(cragId));
 
     return ListTile(
       title: Text(route.name),

@@ -22,16 +22,14 @@ extension RouteDisciplineLabel on RouteDiscipline {
 
 class RoutePitch {
   final int order;
-  final int? lengthMeters;
-  final int? quickdraws;
   final String? grade;
+  final int? bolt;
 
-  const RoutePitch({required this.order, this.lengthMeters, this.quickdraws, this.grade});
+  const RoutePitch({required this.order, this.grade, this.bolt});
 }
 
 class ClimbRoute {
   final String id;
-  final String cragId;
   final String wallId;
   final int order;
   final String name;
@@ -48,7 +46,6 @@ class ClimbRoute {
 
   const ClimbRoute({
     required this.id,
-    required this.cragId,
     required this.wallId,
     required this.order,
     required this.name,
@@ -66,7 +63,6 @@ class ClimbRoute {
 
   ClimbRoute copyWith({
     String? id,
-    String? cragId,
     String? wallId,
     int? order,
     String? name,
@@ -83,7 +79,6 @@ class ClimbRoute {
   }) {
     return ClimbRoute(
       id: id ?? this.id,
-      cragId: cragId ?? this.cragId,
       wallId: wallId ?? this.wallId,
       order: order ?? this.order,
       name: name ?? this.name,

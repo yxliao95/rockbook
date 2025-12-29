@@ -13,15 +13,17 @@ void main() {
 
     expect(store.regions, isNotEmpty);
     expect(store.crags, isNotEmpty);
+    expect(store.zones, isNotEmpty);
     expect(store.walls, isNotEmpty);
     expect(store.routes, isNotEmpty);
-    expect(store.walls.length, store.crags.length);
 
     final region = store.regions.first;
     expect(store.regionPath(region.id).contains(region.name), isTrue);
 
     for (final route in store.routes) {
-      expect(store.cragById(route.cragId), isNotNull);
+      final cragId = store.cragIdForRoute(route);
+      expect(cragId, isNotNull);
+      expect(store.cragById(cragId!), isNotNull);
       expect(store.wallById(route.wallId), isNotNull);
     }
   });

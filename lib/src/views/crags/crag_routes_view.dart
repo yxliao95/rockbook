@@ -209,7 +209,7 @@ class CragRoutesPage extends ConsumerWidget {
                     const SizedBox(height: 8),
                     DropdownButtonFormField<Wall>(
                       initialValue: selectedWall,
-                      decoration: const InputDecoration(labelText: '岩壁/巨石', border: OutlineInputBorder()),
+                      decoration: const InputDecoration(labelText: '岩壁/抱石区', border: OutlineInputBorder()),
                       items: walls.map((wall) => DropdownMenuItem(value: wall, child: Text(wall.name))).toList(),
                       onChanged: mode == _RouteEditMode.delete ? null : (wall) => setState(() => selectedWall = wall),
                     ),
@@ -267,7 +267,6 @@ class CragRoutesPage extends ConsumerWidget {
                       if (selectedWall == null) return;
                       final newRoute = ClimbRoute(
                         id: 'route-${DateTime.now().microsecondsSinceEpoch}',
-                        cragId: cragId,
                         wallId: selectedWall!.id,
                         order: int.tryParse(orderController.text.trim()) ?? 1,
                         name: nameController.text.trim().isEmpty ? '新线路' : nameController.text.trim(),

@@ -129,7 +129,7 @@ class CragDetailPage extends ConsumerWidget {
               ),
               ListTile(
                 leading: const Icon(Icons.add),
-                title: const Text('新增岩壁/巨石'),
+                title: const Text('新增岩壁/抱石区'),
                 onTap: () {
                   Navigator.of(context).pop();
                   _showWallEditor(context, ref, crag, walls, mode: _WallEditMode.create);
@@ -137,7 +137,7 @@ class CragDetailPage extends ConsumerWidget {
               ),
               ListTile(
                 leading: const Icon(Icons.edit_attributes_outlined),
-                title: const Text('编辑岩壁/巨石'),
+                title: const Text('编辑岩壁/抱石区'),
                 onTap: () {
                   Navigator.of(context).pop();
                   _showWallEditor(context, ref, crag, walls, mode: _WallEditMode.update);
@@ -145,7 +145,7 @@ class CragDetailPage extends ConsumerWidget {
               ),
               ListTile(
                 leading: const Icon(Icons.delete_outline),
-                title: const Text('删除岩壁/巨石'),
+                title: const Text('删除岩壁/抱石区'),
                 onTap: () {
                   Navigator.of(context).pop();
                   _showWallEditor(context, ref, crag, walls, mode: _WallEditMode.delete);
@@ -258,7 +258,7 @@ class CragDetailPage extends ConsumerWidget {
     if (walls.isEmpty && mode != _WallEditMode.create) return;
     Wall? selectedWall = walls.isNotEmpty ? walls.first : null;
     final nameController = TextEditingController(text: selectedWall?.name ?? '');
-    WallType selectedType = selectedWall?.type ?? WallType.cliff;
+    WallType selectedType = selectedWall?.type ?? WallType.wall;
 
     await showDialog<void>(
       context: context,
@@ -295,7 +295,9 @@ class CragDetailPage extends ConsumerWidget {
                     initialValue: selectedType,
                     decoration: const InputDecoration(labelText: '类型', border: OutlineInputBorder()),
                     items: WallType.values
-                        .map((type) => DropdownMenuItem(value: type, child: Text(type == WallType.cliff ? '岩壁' : '巨石')))
+                        .map(
+                          (type) => DropdownMenuItem(value: type, child: Text(type == WallType.wall ? '岩壁' : '抱石区')),
+                        )
                         .toList(),
                     onChanged: mode == _WallEditMode.delete
                         ? null
@@ -366,11 +368,11 @@ extension _WallEditModeLabel on _WallEditMode {
   String get label {
     switch (this) {
       case _WallEditMode.create:
-        return '新增岩壁/巨石';
+        return '新增岩壁/抱石区';
       case _WallEditMode.update:
-        return '编辑岩壁/巨石';
+        return '编辑岩壁/抱石区';
       case _WallEditMode.delete:
-        return '删除岩壁/巨石';
+        return '删除岩壁/抱石区';
     }
   }
 }

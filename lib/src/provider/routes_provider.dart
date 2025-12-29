@@ -107,9 +107,11 @@ final routeByIdProvider = Provider.family<ClimbRoute?, String>((ref, routeId) {
 final filteredRoutesProvider = Provider<List<ClimbRoute>>((ref) {
   final state = ref.watch(routesFilterProvider);
   final routes = ref.watch(allRoutesProvider);
+  final data = ref.watch(cragDataProvider).asData?.value;
 
   return routes.where((route) {
-    if (state.selectedCragIds.isNotEmpty && !state.selectedCragIds.contains(route.cragId)) {
+    final cragId = data?.cragIdForRoute(route);
+    if (state.selectedCragIds.isNotEmpty && (cragId == null || !state.selectedCragIds.contains(cragId))) {
       return false;
     }
     if (state.grades.isNotEmpty && !state.grades.contains(route.grade)) {
@@ -178,7 +180,7 @@ final routeGroupsProvider = Provider<List<RegionRouteGroup>>((ref) {
     final cragGroups = <CragRouteGroup>[];
 
     for (final crag in crags) {
-      final cragRoutes = routes.where((route) => route.cragId == crag.id).toList();
+      final cragRoutes = routes.where((route) => data.cragIdForRoute(route) == crag.id).toList();
       if (cragRoutes.isEmpty) continue;
       cragGroups.add(CragRouteGroup(crag: crag, routes: cragRoutes));
     }

@@ -52,11 +52,30 @@ class GradeSummary {
   const GradeSummary.empty() : routeCount = 0, gradeRange = '-';
 }
 
-enum WallType { cliff, boulder }
+enum WallType { wall, bloc }
+
+enum WallParentType { crag, zone }
+
+class Zone {
+  final String id;
+  final String cragId;
+  final String name;
+
+  const Zone({required this.id, required this.cragId, required this.name});
+
+  Zone copyWith({String? id, String? cragId, String? name}) {
+    return Zone(
+      id: id ?? this.id,
+      cragId: cragId ?? this.cragId,
+      name: name ?? this.name,
+    );
+  }
+}
 
 class Wall {
   final String id;
-  final String cragId;
+  final String parentId;
+  final WallParentType parentType;
   final String name;
   final WallType type;
   final String? panoramaImage;
@@ -64,7 +83,8 @@ class Wall {
 
   const Wall({
     required this.id,
-    required this.cragId,
+    required this.parentId,
+    required this.parentType,
     required this.name,
     required this.type,
     this.panoramaImage,
@@ -73,7 +93,8 @@ class Wall {
 
   Wall copyWith({
     String? id,
-    String? cragId,
+    String? parentId,
+    WallParentType? parentType,
     String? name,
     WallType? type,
     String? panoramaImage,
@@ -81,7 +102,8 @@ class Wall {
   }) {
     return Wall(
       id: id ?? this.id,
-      cragId: cragId ?? this.cragId,
+      parentId: parentId ?? this.parentId,
+      parentType: parentType ?? this.parentType,
       name: name ?? this.name,
       type: type ?? this.type,
       panoramaImage: panoramaImage ?? this.panoramaImage,

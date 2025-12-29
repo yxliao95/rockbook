@@ -9,29 +9,39 @@ class CragDataStore {
   final List<RegionNode> regions;
   final List<RegionRelation> relations;
   final List<Crag> crags;
+  final List<Zone> zones;
   final List<Wall> walls;
   final List<ClimbRoute> routes;
 
   final Map<String, RegionNode> _regionsById;
   final Map<String, Crag> _cragsById;
+  final Map<String, Zone> _zonesById;
   final Map<String, Wall> _wallsById;
   final Map<String, List<String>> _regionChildren;
   final Map<String, List<String>> _regionCrags;
+  final Map<String, List<String>> _cragZones;
   final Map<String, List<String>> _cragWalls;
+  final Map<String, List<String>> _zoneWalls;
   final Map<String, List<String>> _wallRoutes;
+  final Map<String, String> _wallCrag;
 
   CragDataStore({
     required this.regions,
     required this.relations,
     required this.crags,
+    required this.zones,
     required this.walls,
     required this.routes,
   }) : _regionsById = {for (final region in regions) region.id: region},
        _cragsById = {for (final crag in crags) crag.id: crag},
+       _zonesById = {for (final zone in zones) zone.id: zone},
        _wallsById = {for (final wall in walls) wall.id: wall},
        _regionChildren = _buildRegionChildren(regions),
        _regionCrags = _buildRegionCrags(crags),
-       _cragWalls = _buildCragWalls(walls),
+       _cragZones = _buildCragZones(zones),
+       _cragWalls = _buildCragWalls(walls, {for (final zone in zones) zone.id: zone}),
+       _zoneWalls = _buildZoneWalls(walls),
+       _wallCrag = _buildWallCrag(walls, {for (final zone in zones) zone.id: zone}),
        _wallRoutes = _buildWallRoutes(routes);
 
   List<RegionNode> rootRegions() => regions.where((region) => region.parentId == null).toList();
@@ -39,6 +49,8 @@ class CragDataStore {
   RegionNode? regionById(String id) => _regionsById[id];
 
   Crag? cragById(String id) => _cragsById[id];
+
+  Zone? zoneById(String id) => _zonesById[id];
 
   Wall? wallById(String id) => _wallsById[id];
 
@@ -59,14 +71,30 @@ class CragDataStore {
     return ids.map((id) => _wallsById[id]).whereType<Wall>().toList();
   }
 
+  List<Zone> zonesByCrag(String cragId) {
+    final ids = _cragZones[cragId] ?? const [];
+    return ids.map((id) => _zonesById[id]).whereType<Zone>().toList();
+  }
+
+  List<Wall> wallsByZone(String zoneId) {
+    final ids = _zoneWalls[zoneId] ?? const [];
+    return ids.map((id) => _wallsById[id]).whereType<Wall>().toList();
+  }
+
+  List<String> wallIdsByCrag(String cragId) => _cragWalls[cragId] ?? const [];
+
   List<ClimbRoute> routesByCrag(String cragId) {
-    return routes.where((route) => route.cragId == cragId).toList();
+    return routes.where((route) => _wallCrag[route.wallId] == cragId).toList();
   }
 
   List<ClimbRoute> routesByWall(String wallId) {
     final ids = _wallRoutes[wallId] ?? const [];
     return ids.map((id) => routes.firstWhere((route) => route.id == id)).toList();
   }
+
+  String? cragIdForWall(String wallId) => _wallCrag[wallId];
+
+  String? cragIdForRoute(ClimbRoute route) => _wallCrag[route.wallId];
 
   CragDataStore reparentRegion({required String regionId, required String? newParentId}) {
     final updatedRegions = regions
@@ -77,6 +105,7 @@ class CragDataStore {
       regions: updatedRegions,
       relations: updatedRelations,
       crags: crags,
+      zones: zones,
       walls: walls,
       routes: routes,
     );
@@ -189,10 +218,44 @@ class CragDataStore {
     return map;
   }
 
-  static Map<String, List<String>> _buildCragWalls(List<Wall> walls) {
+  static Map<String, List<String>> _buildCragWalls(List<Wall> walls, Map<String, Zone> zonesById) {
     final map = <String, List<String>>{};
     for (final wall in walls) {
-      map.putIfAbsent(wall.cragId, () => []).add(wall.id);
+      final cragId = wall.parentType == WallParentType.crag ? wall.parentId : zonesById[wall.parentId]?.cragId;
+      if (cragId == null) continue;
+      map.putIfAbsent(cragId, () => []).add(wall.id);
+    }
+    return map;
+  }
+
+  static Map<String, List<String>> _buildCragZones(List<Zone> zones) {
+    final map = <String, List<String>>{};
+    for (final zone in zones) {
+      map.putIfAbsent(zone.cragId, () => []).add(zone.id);
+    }
+    return map;
+  }
+
+  static Map<String, List<String>> _buildZoneWalls(List<Wall> walls) {
+    final map = <String, List<String>>{};
+    for (final wall in walls) {
+      if (wall.parentType != WallParentType.zone) continue;
+      map.putIfAbsent(wall.parentId, () => []).add(wall.id);
+    }
+    return map;
+  }
+
+  static Map<String, String> _buildWallCrag(List<Wall> walls, Map<String, Zone> zonesById) {
+    final map = <String, String>{};
+    for (final wall in walls) {
+      if (wall.parentType == WallParentType.crag) {
+        map[wall.id] = wall.parentId;
+      } else {
+        final zone = zonesById[wall.parentId];
+        if (zone != null) {
+          map[wall.id] = zone.cragId;
+        }
+      }
     }
     return map;
   }
@@ -218,12 +281,7 @@ class _GradeValue {
 
 class _GradeScales {
   static const List<String> yds = [
-    '5.0',
-    '5.1',
-    '5.2',
-    '5.3',
-    '5.4',
-    '5.5',
+    '<5.6',
     '5.6',
     '5.7',
     '5.8',
@@ -255,24 +313,7 @@ class _GradeScales {
   ];
 
   static const List<String> french = [
-    '1a',
-    '1a+',
-    '1b',
-    '1b+',
-    '1c',
-    '1c+',
-    '2a',
-    '2a+',
-    '2b',
-    '2b+',
-    '2c',
-    '2c+',
-    '3a',
-    '3a+',
-    '3b',
-    '3b+',
-    '3c',
-    '3c+',
+    '<4a',
     '4a',
     '4a+',
     '4b',
@@ -311,12 +352,8 @@ class _GradeScales {
   ];
 
   static const List<String> vScale = [
-    'VB-',
     'VB',
-    'VB+',
-    'V0-',
     'V0',
-    'V0+',
     'V1',
     'V2',
     'V3',
@@ -349,6 +386,7 @@ class CragDataService {
 
     final regionNodes = <RegionNode>[];
     final crags = <Crag>[];
+    final zones = <Zone>[];
     final walls = <Wall>[];
     final routes = <ClimbRoute>[];
 
@@ -357,8 +395,10 @@ class CragDataService {
 
     int regionCounter = 0;
     int cragCounter = 0;
+    int zoneCounter = 0;
     int wallCounter = 0;
     int routeCounter = 0;
+    final wallRouteCounter = <String, int>{};
 
     final cragJson = jsonDecode(await rootBundle.loadString('resources/crags.json'));
     if (cragJson is List) {
@@ -366,22 +406,33 @@ class CragDataService {
         _parseCragNode(
           raw,
           parentRegionId: null,
+          parentCragId: null,
+          parentZoneId: null,
+          parentWallId: null,
           regionNodes: regionNodes,
           crags: crags,
+          zones: zones,
+          walls: walls,
+          routes: routes,
           regionNameIndex: regionNameIndex,
           cragNameIndex: cragNameIndex,
           regionCounter: () => 'r${regionCounter++}',
           cragCounter: () => 'c${cragCounter++}',
+          zoneCounter: () => 'z${zoneCounter++}',
+          wallCounter: () => 'w${wallCounter++}',
+          routeCounter: () => 'route_${routeCounter++}',
+          wallRouteCounter: wallRouteCounter,
         );
       }
     }
 
-    for (final crag in crags) {
-      final wallId = 'w${wallCounter++}';
-      walls.add(Wall(id: wallId, cragId: crag.id, name: '主壁', type: WallType.cliff));
+    final zonesById = {for (final zone in zones) zone.id: zone};
+    final wallByCrag = <String, String>{};
+    for (final wall in walls) {
+      final cragId = wall.parentType == WallParentType.crag ? wall.parentId : zonesById[wall.parentId]?.cragId;
+      if (cragId == null) continue;
+      wallByCrag.putIfAbsent(cragId, () => wall.id);
     }
-
-    final wallByCrag = {for (final wall in walls) wall.cragId: wall.id};
 
     final routesJson = jsonDecode(await rootBundle.loadString('resources/routes.json'));
     final regionsJson = routesJson is Map<String, dynamic> ? routesJson['thecrag_regions'] : null;
@@ -413,10 +464,15 @@ class CragDataService {
                 crags: crags,
                 cragNameIndex: cragNameIndex,
                 cragCounter: () => 'c${cragCounter++}',
+              );
+          final wallId =
+              wallByCrag[cragId] ??
+              _addDefaultWall(
+                cragId: cragId,
                 walls: walls,
                 wallCounter: () => 'w${wallCounter++}',
+                wallByCrag: wallByCrag,
               );
-          final wallId = wallByCrag[cragId] ?? walls.firstWhere((wall) => wall.cragId == cragId).id;
           final routeList = rawCrag['thecrag_routes'];
           if (routeList is! List) continue;
           int order = 1;
@@ -431,7 +487,6 @@ class CragDataService {
             routes.add(
               ClimbRoute(
                 id: 'route_${routeCounter++}',
-                cragId: cragId,
                 wallId: wallId,
                 order: order++,
                 name: routeName.trim(),
@@ -447,60 +502,196 @@ class CragDataService {
 
     final relations = _buildRelations(regionNodes);
 
-    _cache = CragDataStore(regions: regionNodes, relations: relations, crags: crags, walls: walls, routes: routes);
+    _cache = CragDataStore(
+      regions: regionNodes,
+      relations: relations,
+      crags: crags,
+      zones: zones,
+      walls: walls,
+      routes: routes,
+    );
     return _cache!;
   }
 
   static void _parseCragNode(
     dynamic raw, {
     required String? parentRegionId,
+    required String? parentCragId,
+    required String? parentZoneId,
+    required String? parentWallId,
     required List<RegionNode> regionNodes,
     required List<Crag> crags,
+    required List<Zone> zones,
+    required List<Wall> walls,
+    required List<ClimbRoute> routes,
     required Map<String, String> regionNameIndex,
     required Map<String, Map<String, String>> cragNameIndex,
     required String Function() regionCounter,
     required String Function() cragCounter,
+    required String Function() zoneCounter,
+    required String Function() wallCounter,
+    required String Function() routeCounter,
+    required Map<String, int> wallRouteCounter,
   }) {
     if (raw is! Map<String, dynamic>) return;
-    final name = raw['name'];
-    if (name is! String || name.trim().isEmpty) return;
-    final subtype = raw['subtype'];
-    final subtypeValue = subtype is String ? subtype : '';
-
-    if (_isCragSubtype(subtypeValue)) {
-      final cragId = cragCounter();
-      crags.add(Crag(id: cragId, regionId: parentRegionId ?? 'root', name: name.trim()));
-      if (parentRegionId != null) {
-        cragNameIndex.putIfAbsent(parentRegionId, () => {})[name] = cragId;
-      }
-      return;
-    }
-
-    final regionId = regionCounter();
-    final regionType = subtypeValue == 'area' ? RegionType.area : RegionType.region;
-    regionNodes.add(RegionNode(id: regionId, name: name.trim(), parentId: parentRegionId, type: regionType));
-    regionNameIndex.putIfAbsent(name, () => regionId);
-
+    final name = _readText(raw['title']) ?? _readText(raw['name']);
+    if (name == null || name.isEmpty) return;
+    final subtypeValue = _readText(raw['data_subtype']) ?? _readText(raw['subtype']) ?? '';
     final children = raw['children'];
-    if (children is List) {
-      for (final child in children) {
+    final childNodes = children is List ? children : const [];
+
+    if (subtypeValue == 'region' || subtypeValue == 'area') {
+      final regionId = regionCounter();
+      final regionType = subtypeValue == 'area' ? RegionType.area : RegionType.region;
+      regionNodes.add(RegionNode(id: regionId, name: name, parentId: parentRegionId, type: regionType));
+      regionNameIndex.putIfAbsent(name, () => regionId);
+      for (final child in childNodes) {
         _parseCragNode(
           child,
           parentRegionId: regionId,
+          parentCragId: null,
+          parentZoneId: null,
+          parentWallId: null,
           regionNodes: regionNodes,
           crags: crags,
+          zones: zones,
+          walls: walls,
+          routes: routes,
           regionNameIndex: regionNameIndex,
           cragNameIndex: cragNameIndex,
           regionCounter: regionCounter,
           cragCounter: cragCounter,
+          zoneCounter: zoneCounter,
+          wallCounter: wallCounter,
+          routeCounter: routeCounter,
+          wallRouteCounter: wallRouteCounter,
         );
       }
+      return;
     }
-  }
 
-  static bool _isCragSubtype(String subtype) {
-    if (subtype.isEmpty) return false;
-    return subtype == 'crag' || subtype == 'cliff' || subtype == 'boulder' || subtype == 'field';
+    if (subtypeValue == 'crag') {
+      final cragId = cragCounter();
+      crags.add(Crag(id: cragId, regionId: parentRegionId ?? 'root', name: name));
+      if (parentRegionId != null) {
+        cragNameIndex.putIfAbsent(parentRegionId, () => {})[name] = cragId;
+      }
+      for (final child in childNodes) {
+        _parseCragNode(
+          child,
+          parentRegionId: parentRegionId,
+          parentCragId: cragId,
+          parentZoneId: null,
+          parentWallId: null,
+          regionNodes: regionNodes,
+          crags: crags,
+          zones: zones,
+          walls: walls,
+          routes: routes,
+          regionNameIndex: regionNameIndex,
+          cragNameIndex: cragNameIndex,
+          regionCounter: regionCounter,
+          cragCounter: cragCounter,
+          zoneCounter: zoneCounter,
+          wallCounter: wallCounter,
+          routeCounter: routeCounter,
+          wallRouteCounter: wallRouteCounter,
+        );
+      }
+      return;
+    }
+
+    if (subtypeValue == 'zone') {
+      if (parentCragId == null) return;
+      final zoneId = zoneCounter();
+      zones.add(Zone(id: zoneId, cragId: parentCragId, name: name));
+      for (final child in childNodes) {
+        _parseCragNode(
+          child,
+          parentRegionId: parentRegionId,
+          parentCragId: parentCragId,
+          parentZoneId: zoneId,
+          parentWallId: null,
+          regionNodes: regionNodes,
+          crags: crags,
+          zones: zones,
+          walls: walls,
+          routes: routes,
+          regionNameIndex: regionNameIndex,
+          cragNameIndex: cragNameIndex,
+          regionCounter: regionCounter,
+          cragCounter: cragCounter,
+          zoneCounter: zoneCounter,
+          wallCounter: wallCounter,
+          routeCounter: routeCounter,
+          wallRouteCounter: wallRouteCounter,
+        );
+      }
+      return;
+    }
+
+    if (subtypeValue == 'wall' || subtypeValue == 'bloc') {
+      if (parentCragId == null) return;
+      final wallId = wallCounter();
+      final parentType = parentZoneId == null ? WallParentType.crag : WallParentType.zone;
+      final parentId = parentZoneId ?? parentCragId;
+      walls.add(
+        Wall(
+          id: wallId,
+          parentId: parentId,
+          parentType: parentType,
+          name: name,
+          type: subtypeValue == 'bloc' ? WallType.bloc : WallType.wall,
+        ),
+      );
+      for (final child in childNodes) {
+        _parseCragNode(
+          child,
+          parentRegionId: parentRegionId,
+          parentCragId: parentCragId,
+          parentZoneId: parentZoneId,
+          parentWallId: wallId,
+          regionNodes: regionNodes,
+          crags: crags,
+          zones: zones,
+          walls: walls,
+          routes: routes,
+          regionNameIndex: regionNameIndex,
+          cragNameIndex: cragNameIndex,
+          regionCounter: regionCounter,
+          cragCounter: cragCounter,
+          zoneCounter: zoneCounter,
+          wallCounter: wallCounter,
+          routeCounter: routeCounter,
+          wallRouteCounter: wallRouteCounter,
+        );
+      }
+      return;
+    }
+
+    if (subtypeValue == 'route') {
+      if (parentWallId == null) return;
+      final order = (wallRouteCounter[parentWallId] ?? 0) + 1;
+      wallRouteCounter[parentWallId] = order;
+      final grade = _readText(raw['grade']) ?? _readText(raw['route_grade']) ?? '-';
+      final discipline = _parseDiscipline(_readText(raw['discipline']) ?? _readText(raw['route_type']) ?? '');
+      final bolts = _readInt(raw['bolt']) ?? _readInt(raw['bolts']) ?? _readInt(raw['quickdraw_count']);
+      final pitches = _parsePitches(childNodes);
+      routes.add(
+        ClimbRoute(
+          id: routeCounter(),
+          wallId: parentWallId,
+          order: order,
+          name: name,
+          grade: grade,
+          discipline: discipline,
+          quickdraws: bolts,
+          isMultiPitch: pitches.isNotEmpty,
+          pitches: pitches,
+        ),
+      );
+      return;
+    }
   }
 
   static String _addRegion({
@@ -522,15 +713,50 @@ class CragDataService {
     required List<Crag> crags,
     required Map<String, Map<String, String>> cragNameIndex,
     required String Function() cragCounter,
-    required List<Wall> walls,
-    required String Function() wallCounter,
   }) {
     final cragId = cragCounter();
     crags.add(Crag(id: cragId, regionId: regionId, name: name));
     cragNameIndex.putIfAbsent(regionId, () => {})[name] = cragId;
-    final wallId = wallCounter();
-    walls.add(Wall(id: wallId, cragId: cragId, name: '主壁', type: WallType.cliff));
     return cragId;
+  }
+
+  static String _addDefaultWall({
+    required String cragId,
+    required List<Wall> walls,
+    required String Function() wallCounter,
+    required Map<String, String> wallByCrag,
+  }) {
+    final wallId = wallCounter();
+    walls.add(Wall(id: wallId, parentId: cragId, parentType: WallParentType.crag, name: '主壁', type: WallType.wall));
+    wallByCrag[cragId] = wallId;
+    return wallId;
+  }
+
+  static String? _readText(dynamic value) {
+    if (value is! String) return null;
+    final trimmed = value.trim();
+    return trimmed.isEmpty ? null : trimmed;
+  }
+
+  static int? _readInt(dynamic value) {
+    if (value is int) return value;
+    if (value is num) return value.toInt();
+    if (value is String) return int.tryParse(value.trim());
+    return null;
+  }
+
+  static List<RoutePitch> _parsePitches(List<dynamic> children) {
+    final pitches = <RoutePitch>[];
+    var order = 1;
+    for (final child in children) {
+      if (child is! Map<String, dynamic>) continue;
+      final subtype = _readText(child['data_subtype']) ?? _readText(child['subtype']) ?? '';
+      if (subtype != 'pitch') continue;
+      final grade = _readText(child['grade']) ?? _readText(child['route_grade']);
+      final bolt = _readInt(child['bolt']) ?? _readInt(child['bolts']) ?? _readInt(child['quickdraw_count']);
+      pitches.add(RoutePitch(order: order++, grade: grade, bolt: bolt));
+    }
+    return pitches;
   }
 
   static List<RegionRelation> _buildRelations(List<RegionNode> regions) {

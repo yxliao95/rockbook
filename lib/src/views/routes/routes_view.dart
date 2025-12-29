@@ -159,8 +159,8 @@ class RoutesPage extends ConsumerWidget {
     final crags = data.crags;
     if (crags.isEmpty) return;
     ClimbRoute? selectedRoute = routes.isNotEmpty ? routes.first : null;
-    Crag? selectedCrag = crags.first;
-    final initialWalls = data.walls.where((wall) => wall.cragId == selectedCrag?.id).toList();
+    Crag selectedCrag = crags.first;
+    final initialWalls = data.wallsByCrag(selectedCrag.id);
     Wall? selectedWall = initialWalls.isNotEmpty ? initialWalls.first : null;
     RouteDiscipline selectedDiscipline = RouteDiscipline.sport;
     final nameController = TextEditingController(text: selectedRoute?.name ?? '');
@@ -168,7 +168,10 @@ class RoutesPage extends ConsumerWidget {
     final orderController = TextEditingController(text: '1');
 
     if (selectedRoute != null && mode != _RouteEditMode.create) {
-      selectedCrag = data.cragById(selectedRoute.cragId) ?? selectedCrag;
+      final routeCragId = data.cragIdForRoute(selectedRoute);
+      if (routeCragId != null) {
+        selectedCrag = data.cragById(routeCragId) ?? selectedCrag;
+      }
       selectedWall = data.wallById(selectedRoute.wallId);
       selectedDiscipline = selectedRoute.discipline;
       nameController.text = selectedRoute.name;
@@ -181,7 +184,7 @@ class RoutesPage extends ConsumerWidget {
       builder: (_) {
         return StatefulBuilder(
           builder: (context, setState) {
-            final wallOptions = data.walls.where((wall) => wall.cragId == selectedCrag!.id).toList();
+            final wallOptions = data.wallsByCrag(selectedCrag.id);
             if (selectedWall == null && wallOptions.isNotEmpty) {
               selectedWall = wallOptions.first;
             }
@@ -202,7 +205,10 @@ class RoutesPage extends ConsumerWidget {
                                 if (route == null) return;
                                 setState(() {
                                   selectedRoute = route;
-                                  selectedCrag = data.cragById(route.cragId) ?? selectedCrag;
+                                  final routeCragId = data.cragIdForRoute(route);
+                                  if (routeCragId != null) {
+                                    selectedCrag = data.cragById(routeCragId) ?? selectedCrag;
+                                  }
                                   selectedWall = data.wallById(route.wallId);
                                   selectedDiscipline = route.discipline;
                                   nameController.text = route.name;
@@ -222,7 +228,7 @@ class RoutesPage extends ConsumerWidget {
                               if (crag == null) return;
                               setState(() {
                                 selectedCrag = crag;
-                                final walls = data.walls.where((wall) => wall.cragId == crag.id).toList();
+                                final walls = data.wallsByCrag(crag.id);
                                 selectedWall = walls.isNotEmpty ? walls.first : null;
                               });
                             },
@@ -230,7 +236,7 @@ class RoutesPage extends ConsumerWidget {
                     const SizedBox(height: 8),
                     DropdownButtonFormField<Wall>(
                       initialValue: selectedWall,
-                      decoration: const InputDecoration(labelText: '岩壁/巨石', border: OutlineInputBorder()),
+                      decoration: const InputDecoration(labelText: '岩壁/抱石区', border: OutlineInputBorder()),
                       items: wallOptions.map((wall) => DropdownMenuItem(value: wall, child: Text(wall.name))).toList(),
                       onChanged: mode == _RouteEditMode.delete ? null : (wall) => setState(() => selectedWall = wall),
                     ),
@@ -281,15 +287,13 @@ class RoutesPage extends ConsumerWidget {
                           grade: gradeController.text.trim(),
                           discipline: selectedDiscipline,
                           wallId: selectedWall?.id ?? selectedRoute!.wallId,
-                          cragId: selectedCrag!.id,
                           order: int.tryParse(orderController.text.trim()) ?? selectedRoute!.order,
                         ),
                       );
                     } else if (mode == _RouteEditMode.create) {
-                      if (selectedCrag == null || selectedWall == null) return;
+                      if (selectedWall == null) return;
                       final newRoute = ClimbRoute(
                         id: 'route-${DateTime.now().microsecondsSinceEpoch}',
-                        cragId: selectedCrag!.id,
                         wallId: selectedWall!.id,
                         order: int.tryParse(orderController.text.trim()) ?? 1,
                         name: nameController.text.trim().isEmpty ? '新线路' : nameController.text.trim(),

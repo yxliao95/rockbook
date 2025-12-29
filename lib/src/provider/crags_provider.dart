@@ -100,7 +100,13 @@ class CragDataNotifier extends AsyncNotifier<CragDataStore> {
     final store = state.asData?.value;
     if (store == null) return;
     final crag = Crag(id: _newId('c'), regionId: regionId, name: name);
-    final wall = Wall(id: _newId('w'), cragId: crag.id, name: '主壁', type: WallType.cliff);
+    final wall = Wall(
+      id: _newId('w'),
+      parentId: crag.id,
+      parentType: WallParentType.crag,
+      name: '主壁',
+      type: WallType.wall,
+    );
     final updated = _rebuildStore(store, crags: [...store.crags, crag], walls: [...store.walls, wall]);
     state = AsyncValue.data(updated);
     _logChange(
@@ -132,10 +138,18 @@ class CragDataNotifier extends AsyncNotifier<CragDataStore> {
     if (store == null) return;
     final crag = store.cragById(cragId);
     if (crag == null) return;
+    final wallIds = store.wallIdsByCrag(cragId).toSet();
     final updatedCrags = store.crags.where((crag) => crag.id != cragId).toList();
-    final updatedWalls = store.walls.where((wall) => wall.cragId != cragId).toList();
-    final updatedRoutes = store.routes.where((route) => route.cragId != cragId).toList();
-    final updated = _rebuildStore(store, crags: updatedCrags, walls: updatedWalls, routes: updatedRoutes);
+    final updatedZones = store.zones.where((zone) => zone.cragId != cragId).toList();
+    final updatedWalls = store.walls.where((wall) => !wallIds.contains(wall.id)).toList();
+    final updatedRoutes = store.routes.where((route) => !wallIds.contains(route.wallId)).toList();
+    final updated = _rebuildStore(
+      store,
+      crags: updatedCrags,
+      zones: updatedZones,
+      walls: updatedWalls,
+      routes: updatedRoutes,
+    );
     state = AsyncValue.data(updated);
     _logChange(
       targetType: ChangeTargetType.crag,
@@ -149,7 +163,13 @@ class CragDataNotifier extends AsyncNotifier<CragDataStore> {
   void addWall({required String cragId, required String name, required WallType type}) {
     final store = state.asData?.value;
     if (store == null) return;
-    final wall = Wall(id: _newId('w'), cragId: cragId, name: name, type: type);
+    final wall = Wall(
+      id: _newId('w'),
+      parentId: cragId,
+      parentType: WallParentType.crag,
+      name: name,
+      type: type,
+    );
     final updated = _rebuildStore(store, walls: [...store.walls, wall]);
     state = AsyncValue.data(updated);
     _logChange(
@@ -244,6 +264,7 @@ class CragDataNotifier extends AsyncNotifier<CragDataStore> {
     CragDataStore store, {
     List<RegionNode>? regions,
     List<Crag>? crags,
+    List<Zone>? zones,
     List<Wall>? walls,
     List<ClimbRoute>? routes,
   }) {
@@ -252,6 +273,7 @@ class CragDataNotifier extends AsyncNotifier<CragDataStore> {
       regions: nextRegions,
       relations: CragDataService.buildRelations(nextRegions),
       crags: crags ?? store.crags,
+      zones: zones ?? store.zones,
       walls: walls ?? store.walls,
       routes: routes ?? store.routes,
     );
@@ -274,24 +296,26 @@ class CragDataNotifier extends AsyncNotifier<CragDataStore> {
   }
 
   List<String> _wallScopeKeys(Wall wall, CragDataStore store) {
-    final crag = store.cragById(wall.cragId);
+    final cragId = store.cragIdForWall(wall.id);
+    final crag = cragId == null ? null : store.cragById(cragId);
     final regionId = crag?.regionId;
     return [
       'scope:crags',
       'wall:${wall.id}',
-      'crag:${wall.cragId}',
+      if (cragId != null) 'crag:$cragId',
       if (regionId != null) 'region:$regionId',
       if (regionId != null) 'region-tree:$regionId',
     ];
   }
 
   List<String> _routeScopeKeys(ClimbRoute route, CragDataStore store) {
-    final crag = store.cragById(route.cragId);
+    final cragId = store.cragIdForRoute(route);
+    final crag = cragId == null ? null : store.cragById(cragId);
     final regionId = crag?.regionId;
     return [
       'scope:routes',
       'route:${route.id}',
-      'crag:${route.cragId}',
+      if (cragId != null) 'crag:$cragId',
       if (regionId != null) 'region:$regionId',
       if (regionId != null) 'region-tree:$regionId',
     ];
